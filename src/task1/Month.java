@@ -17,6 +17,7 @@ public enum Month {
     String season;
 
     Month(int days, String season) {
+        //constructor
         this.days = days;
         this.season = season;
     }

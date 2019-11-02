@@ -1,6 +1,12 @@
 package task1;
 
 import java.util.Scanner;
+/**
+ * @author Vadym
+ * @version 1.2
+ * @since 1
+ * @exceptions WrongInputConsoleParametersException
+ */
 
 public class IsExist {
     Scanner sc = new Scanner(System.in);
@@ -12,20 +18,29 @@ public class IsExist {
     }
 
     void isExist(){
-        System.out.println("Write name of month");
-        month = sc.nextLine();
-        boolean flag = true;
-        for (int i = 0; i <Month.values().length ; i++) {
-            if (month.equalsIgnoreCase(arr[i].name())){
-                System.out.println(month+" is exist");
-                flag = false;
+        //checks exist written month or not. If not, method reruns.
+        try {
+            System.out.println("Write name of month");
+            month = sc.nextLine();
+            boolean flag = true;
+            for (int i = 0; i < Month.values().length; i++) {
+                if (month.equalsIgnoreCase(arr[i].name())) {
+                    System.out.println(month + " is exist");
+                    flag = false;
+                }
+            }
+            if (flag) {
+                System.out.println(month + " don't exist");
+                throw new WrongInputConsoleParametersException();
             }
         }
-        if(flag){
-            System.out.println(month+" don't exist");
+        catch(WrongInputConsoleParametersException exc){
+            System.out.println("This month don't exist, try again...");
+            isExist();
         }
     }
     void sameSeason(){
+        //search and out months of same season
         System.out.println("Months of this season: ");
         for (int i = 0; i <Month.values().length ; i++) {
             if (month.equalsIgnoreCase(arr[i].name())){
@@ -39,6 +54,7 @@ public class IsExist {
         System.out.println();
     }
     void sameDays(){
+        //search and out months with same number of days
         System.out.println("Months with same number of days: ");
         boolean flag = true;
         for (int i = 0; i <Month.values().length ; i++) {
@@ -57,6 +73,7 @@ public class IsExist {
         System.out.println();
     }
     void lessDays(){
+        //search and out months with less number of days, that has written in console month
         System.out.println("Months with less number of days: ");
         boolean flag = true;
         for (int i = 0; i <Month.values().length ; i++) {
@@ -75,6 +92,7 @@ public class IsExist {
         System.out.println();
     }
     void moreDays(){
+        //search and out months with more number of days, that has written in console month
         System.out.println("Months with more days: ");
         boolean flag = true;
         for (int i = 0; i <Month.values().length ; i++) {
@@ -93,6 +111,7 @@ public class IsExist {
         System.out.println();
     }
     void nextSeason(){
+        //out next season
         System.out.println("Next season: ");
         for (int i = 0; i <Month.values().length-3 ; i++) {
             if (month.equalsIgnoreCase(arr[i].name())){
@@ -108,6 +127,7 @@ public class IsExist {
         System.out.println();
     }
     void previousSeason(){
+        //out previous season
         System.out.println("Previous season: ");
         if (month.equalsIgnoreCase(arr[0].name())||month.equalsIgnoreCase(arr[1].name())){
             System.out.println(arr[9].season);
